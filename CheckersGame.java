@@ -7,6 +7,8 @@ public class CheckersGame {
     public CheckersGame() {
         board = new char[8][8];
         newBoard();
+        blackPieces = 12;
+        redPieces = 12;
     }
 
     // Methods
@@ -36,28 +38,37 @@ public class CheckersGame {
     }
 
     /**
-     * Prints the current status of the board.
+     * Prints the current status of the board in a viewable layout, including borders and coordinates.
      */
     public void printBoard() {
         boolean firstRow = true;
+        System.out.print("     ");
+        for (int i = 1; i <= 8; i++) {
+            System.out.printf("%d     ", i);
+        }
+        System.out.println();
         for (int i = 0; i < 8; i++) {
             if (firstRow) {
                 firstRow = false;
-            } else {
-                for (int n = 0; n < 47; n++) {
+                System.out.print("  ");
+                for (int n = 0; n < 49; n++) {
                     System.out.print('-');
                 }
                 System.out.println();
             }
             boolean firstColumn = true;
+            printRowCoordinate(i);
             for (int j = 0; j < 8; j++) {
                 if (firstColumn) {
                     firstColumn = false;
-                    System.out.print("  ");
-                } else {
-                    System.out.print("  |  ");
+                    System.out.print("|");
                 }
-                System.out.print(board[i][j]);
+                System.out.print("  " + board[i][j] + "  |");
+            }
+            System.out.println();
+            System.out.print("  ");
+            for (int n = 0; n < 49; n++) {
+                System.out.print('-');
             }
             System.out.println();
         }
@@ -86,5 +97,11 @@ public class CheckersGame {
 
     public void setRedPieces(int newRedPieces) {
         redPieces = newRedPieces;
+    }
+
+    // Helper functions
+    private void printRowCoordinate(int rowNum) {
+        char rowChar = (char)(rowNum + 65);
+        System.out.printf("%c ", rowChar);
     }
 }
